@@ -159,12 +159,10 @@ const Room = () => {
             </>
           )}
 
-          {remoteStream && entry && (
+          {remoteStream && (
             <>
               <div className="">
-                <h2 className="text-center font-semibold mt-4">
-                  {entry}'s Video
-                </h2>
+                <h2 className="text-center font-semibold mt-4">Remote Video</h2>
                 <ReactPlayer
                   playing
                   muted
