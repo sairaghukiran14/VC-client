@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-image: url("./brocolli.jpeg");
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +37,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+.room-section {
+  min-height: 70vh;
+}
+.room_title {
+  background-image: url("./grass.gif");
+  background-clip: text;
+  background-size: cover;
+  background-position: center;
+  color: transparent;
 }

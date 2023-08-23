@@ -29,34 +29,38 @@ const Lobby = () => {
     };
   }, [socket, handleJoinRoom]);
   return (
-    <div className="lobby_section flex flex-col items-center pt-9">
-      <h1 className="text-center font-semibold text-xl">Lobby</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="flex w-96 flex-col gap-1 justify-center items-center p-3"
-      >
-        <input
-          type="email"
-          placeholder="Enter Email"
-          className="px-3 py-1 border rounded w-full"
-          value={email_address}
-          onChange={(e) => {
-            setEmail_address(e.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Enter Room ID"
-          className="px-3 py-1 border rounded w-full"
-          value={roomID}
-          onChange={(e) => {
-            setRoomID(e.target.value);
-          }}
-        />
-        <button className="w-full rounded bg-lime-700 text-white px-3 py-1">
-          Join
-        </button>
-      </form>
+    <div className="lobby flex justify-center items-center">
+      <div className="lobby_section flex flex-col items-center  bg-white w-1/2 text-center rounded mt-9">
+        <h1 className="text-center text-black text-2xl font-bold bg-white mt-3">
+          Lobby
+        </h1>
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-full flex-col gap-3 justify-center items-center p-3 pb-6"
+        >
+          <input
+            type="email"
+            placeholder="Enter Email"
+            className="px-3 py-1 border rounded w-full"
+            value={email_address}
+            onChange={(e) => {
+              setEmail_address(e.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Enter Room ID"
+            className="px-3 py-1 border rounded w-full"
+            value={roomID}
+            onChange={(e) => {
+              setRoomID(e.target.value);
+            }}
+          />
+          <button className="w-full rounded bg-lime-700 font-semibold text-white px-3 py-2">
+            Join
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

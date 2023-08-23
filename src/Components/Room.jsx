@@ -8,9 +8,11 @@ const Room = () => {
   const [remoteSocketID, setRemoteSocketID] = useState(null);
   const [myStream, setMystream] = useState();
   const [remoteStream, setRemotestream] = useState();
+  const [entry, setEntry] = useState();
   //
   const handleuserJoined = useCallback(({ email_address, id }) => {
     console.log(`Email ${email_address} joined the room`);
+    setEntry(email_address);
     setRemoteSocketID(id);
   }, []);
   //
@@ -113,53 +115,68 @@ const Room = () => {
   ]);
   //
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-center text-xl">Room</h1>
+    <div className="room flex justify-center items-center">
+      <div className="room-section flex flex-col items-center bg-white rounded w-3/4 mt-9 p-3">
+        <h1 className="room_title text-center text-3xl p-3 font-extrabold">
+          Room
+        </h1>
+        <div className=" text-center w-full p-3">
+          {entry && remoteSocketID
+            ? `${entry} Entered the Room`
+            : "No One in the Room"}
+        </div>
 
-      {remoteSocketID ? "Connected" : "No One in the room"}
-      {myStream && (
-        <button
-          className="px-2 py-1 bg-orange-400 text-white rounded"
-          onClick={sendStreams}
-        >
-          SendStream
-        </button>
-      )}
-      <br />
-      {remoteSocketID && (
-        <button
-          onClick={handleCallUser}
-          className="bg-blue-500 w-24 text-white rounded"
-        >
-          Call
-        </button>
-      )}
+        {myStream && (
+          <button
+            className="px-2 py-1 bg-orange-400 text-white rounded"
+            onClick={sendStreams}
+          >
+            SendStream
+          </button>
+        )}
+        <br />
+        {remoteSocketID && (
+          <button
+            onClick={handleCallUser}
+            className="bg-blue-500 w-24 text-white rounded"
+          >
+            Call
+          </button>
+        )}
+        <div className="streams flex flex-wrap justify-center items-center">
+          {myStream && (
+            <>
+              <div className="">
+                <h2 className="text-center font-semibold mt-4">Your Video</h2>
+                <ReactPlayer
+                  playing
+                  muted
+                  url={myStream}
+                  height="250px"
+                  width="400px"
+                />
+              </div>
+            </>
+          )}
 
-      {myStream && (
-        <>
-          <h2 className="text-center font-semibold mt-4">Your Video</h2>
-          <ReactPlayer
-            playing
-            muted
-            url={myStream}
-            height="300px"
-            width="500px"
-          />
-        </>
-      )}
-
-      {remoteStream && (
-        <>
-          <h2 className="text-center font-semibold mt-4">remote Video</h2>
-          <ReactPlayer
-            playing
-            muted
-            url={remoteStream}
-            height="300px"
-            width="500px"
-          />
-        </>
-      )}
+          {remoteStream && entry && (
+            <>
+              <div className="">
+                <h2 className="text-center font-semibold mt-4">
+                  {entry}'s Video
+                </h2>
+                <ReactPlayer
+                  playing
+                  muted
+                  url={remoteStream}
+                  height="250px"
+                  width="400px"
+                />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
